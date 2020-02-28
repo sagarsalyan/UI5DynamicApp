@@ -1,0 +1,88 @@
+<core:FragmentDefinition xmlns:layout="sap.ui.layout" xmlns="sap.m" xmlns:core="sap.ui.core">
+	<layout:HorizontalLayout>
+		<layout:VerticalLayout>
+			<HBox>
+				<Label text="Name:" class="sapMObjStatusText"/>
+				<Label text="{headerModel>/name}" class="sapUiTinyMarginBegin"/>
+			</HBox>
+			<HBox>
+				<Label text="Employee No:" class="sapMObjStatusText"/>
+				<Label text="{headerModel>/empno}" class="sapUiTinyMarginBegin"/>
+			</HBox>
+			<HBox>
+				<Label text="Employee Status:" class="sapMObjStatusText"/>
+				<Label text="{headerModel>/stus}" class="sapUiTinyMarginBegin"/>
+			</HBox>
+		</layout:VerticalLayout>
+	</layout:HorizontalLayout>
+	<layout:HorizontalLayout>
+		<layout:VerticalLayout>
+			<HBox>
+				<Label text="Department:" class="sapMObjStatusText"/>
+				<Label text="{headerModel>/dept}" class="sapUiTinyMarginBegin"/>
+			</HBox>
+			<HBox>
+				<Label text="Designation:" class="sapMObjStatusText"/>
+				<Label text="{headerModel>/design}" class="sapUiTinyMarginBegin"/>
+			</HBox>
+			<HBox>
+				<Label text="Office:" class="sapMObjStatusText"/>
+				<Label text="{headerModel>/ofc}" class="sapUiTinyMarginBegin"/>
+			</HBox>
+		</layout:VerticalLayout>
+	</layout:HorizontalLayout>
+	<layout:HorizontalLayout>
+		<layout:VerticalLayout>
+			<HBox>
+				<Label text="Email:" class="sapMObjStatusText"/>
+				<Label text="{headerModel>/email}" class="sapUiTinyMarginBegin"/>
+			</HBox>
+			<HBox>
+				<Label text="Mobile:" class="sapMObjStatusText"/>
+				<Label text="{headerModel>/mobile}" class="sapUiTinyMarginBegin"/>
+			</HBox>
+		</layout:VerticalLayout>
+	</layout:HorizontalLayout>
+</core:FragmentDefinition>
+<!--<core:FragmentDefinition xmlns:l="sap.ui.layout" xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:html="http://www.w3.org/1999/xhtml">-->
+<!--	<l:VerticalLayout>-->
+<!--		<l:VerticalLayout>-->
+<!--			<Label text="Name" class="sapMObjStatusText"/>-->
+<!--			<Text text="{headerModel>/name}" class="sapUiTinyMarginBottom"/>-->
+<!--		</l:VerticalLayout>-->
+<!--		<l:VerticalLayout>-->
+<!--			<Label text="Employee No" class="sapMObjStatusText"/>-->
+<!--			<Text text="{headerModel>/empno}" id="fragEmpNo" class="sapUiTinyMarginBottom"/>-->
+<!--		</l:VerticalLayout>-->
+<!--	</l:VerticalLayout>-->
+<!--	<l:VerticalLayout>-->
+<!--		<l:VerticalLayout>-->
+<!--			<Label text="Designation" class="sapMObjStatusText"/>-->
+<!--			<Text text="{headerModel>/design}" class="sapUiTinyMarginBottom"/>-->
+<!--		</l:VerticalLayout>-->
+<!--		<l:VerticalLayout>-->
+<!--			<Label text="Department" class="sapMObjStatusText"/>-->
+<!--			<Text text="{headerModel>/dept}" class="sapUiTinyMarginBottom"/>-->
+<!--		</l:VerticalLayout>-->
+<!--	</l:VerticalLayout>-->
+<!--	<l:VerticalLayout>-->
+<!--		<l:VerticalLayout>-->
+<!--			<Label text="Office" class="sapMObjStatusText"/>-->
+<!--			<Text text="{headerModel>/ofc}" id="fragOfc" class="sapUiTinyMarginBottom"/>-->
+<!--		</l:VerticalLayout>-->
+<!--		<l:VerticalLayout>-->
+<!--			<Label text="Employee Status" class="sapMObjStatusText"/>-->
+<!--			<Text text="{headerModel>/stus}" class="sapUiTinyMarginBottom"/>-->
+<!--		</l:VerticalLayout>-->
+<!--	</l:VerticalLayout>-->
+<!--	<l:VerticalLayout>-->
+<!--		<l:VerticalLayout>-->
+<!--			<Label text="Mobile" class="sapMObjStatusText"/>-->
+<!--			<Text text="{headerModel>/mobile}" class="sapUiTinyMarginBottom"/>-->
+<!--		</l:VerticalLayout>-->
+<!--		<l:VerticalLayout>-->
+<!--			<Label text="Email" class="sapMObjStatusText"/>-->
+<!--			<Text text="{headerModel>/email}" class="sapUiTinyMarginBottom"/>-->
+<!--		</l:VerticalLayout>-->
+<!--	</l:VerticalLayout>-->
+<!--</core:FragmentDefinition>-->

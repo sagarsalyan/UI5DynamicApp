@@ -1,0 +1,40 @@
+{
+	"controls": [
+		{
+			"Blockid": "",
+			"Blocksequence": "000",
+			"Blocktitle": "",
+			"Description": "",
+			"Fieldcontainer": "TABLE",
+			"Fieldcontroltype": "DATE",
+			"Fieldhasvaluehelp": false,
+			"Fieldlabel": "Requested on",
+			"Fieldlength": "040",
+			"Fieldname": "REQ_DATE",
+			"Fieldtypekind": "",
+			"Fieldvalue": "",
+			"Hidden": false,
+			"IsContainerEditable": "",
+			"Mandatory": false,
+			"Objectkey": null,
+			"Processevent": "0000",
+			"Processid": "ZHRPA_MEDICAL_REIMB",
+			"Processreferencenumber": "",
+			"Readonly": false,
+			"Recordindex": 1,
+			"Relid": "Z466",
+			"SectionId": "1_MEDICAL",
+			"SectionSequence": "000",
+			"SectionTitle": "Medical Reimbursement",
+			"SubSecFieldSequence": "001",
+			"SubSectionId": "1_MEDICAL",
+			"SubSectionSequence": "001",
+			"SubSectionTitle": "",
+			"Subprocessid": "",
+			"TextFieldName": "",
+			"VHMappingField": "",
+			"ValuehelpID": "",
+			"Valuehelpparentfields": ""
+		}
+	]
+}

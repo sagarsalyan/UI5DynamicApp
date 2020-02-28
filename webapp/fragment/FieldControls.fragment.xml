@@ -1,0 +1,60 @@
+<!-- 
+
+ Copyright (C) 2009-2019 SAP SE or an SAP affiliate company. All rights reserved.
+
+ -->
+<core:FragmentDefinition xmlns="sap.m" xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout"
+	xmlns:u="sap.ui.unified" xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<VBox class="sapUiNoMargin">
+		<Input name="{sectionsModel>Fieldname}" selectedKey="{sectionsModel>Processid}" value="{sectionsModel>Fieldvalue}" valueHelpOnly="true"
+			visible="{= ${sectionsModel>Fieldcontroltype} === 'F4HELP' &amp;&amp; !${sectionsModel>Hidden}}" width="100%"
+			editable="{= !${sectionsModel>Readonly} &amp;&amp; true }" showValueHelp="{sectionsModel>Fieldhasvaluehelp}"
+			valueHelpRequest="handleValueHelpRequestMovement"></Input>
+		<Input name="{sectionsModel>Fieldname}" type="{= ${sectionsModel>Blockid} === 'N'? 'Number':'Text'}"
+			visible="{= ${sectionsModel>Fieldcontroltype} === 'INPUT' &amp;&amp; !${sectionsModel>Hidden}}"
+			maxLength="{path: 'sectionsModel>Fieldlength', formatter: '.formatter.fieldLength'}" value="{sectionsModel>Fieldvalue}"
+			editable="{= !${sectionsModel>Readonly} &amp;&amp; true }" liveChange="handleInputValueLiveChange" change="handleInputValueChange"/>
+		<DatePicker width="40%" name="{sectionsModel>Fieldname}"
+			minDate="{parts: [{path: 'sectionsModel>Relid'}, {path: 'sectionsModel>Fieldname'}], formatter: '.formatter.minDateValidation'}"
+			maxDate="{parts: [{path: 'sectionsModel>Relid'}, {path: 'sectionsModel>Fieldname'}], formatter: '.formatter.maxDateValidation'}"
+			visible="{= ${sectionsModel>Fieldcontroltype} === 'DATE' &amp;&amp; !${sectionsModel>Hidden}}" value="{sectionsModel>Fieldvalue}"
+			displayFormat="dd.MM.yyyy" valueFormat="yyyyMMdd" editable="{= !${sectionsModel>Readonly} &amp;&amp; true }" change="onChangeOfDate"/>
+		<!--value="{path: 'sectionsModel>Fieldvalue', formatter: '.formatter.dateFormat'}"-->
+		<Input name="{sectionsModel>Fieldname}" selectedKey="{sectionsModel>Processid}" value="{sectionsModel>Fieldvalue}" valueHelpOnly="true"
+			visible="{= ${sectionsModel>Fieldcontroltype} === 'DROPDOWN' &amp;&amp; !${sectionsModel>Hidden}}" width="100%"
+			editable="{= !${sectionsModel>Readonly} &amp;&amp; true }" showValueHelp="{sectionsModel>Fieldhasvaluehelp}"
+			valueHelpRequest="handleValueHelpRequestMovement"></Input>
+		<CheckBox name="{sectionsModel>Fieldname}"
+			visible="{= ${sectionsModel>Fieldcontroltype} === 'CHECKBOX' &amp;&amp; !${sectionsModel>Hidden}}" select="onPressCheckBox"
+			editable="{= !${sectionsModel>Readonly} &amp;&amp; true }" selected="{= ${sectionsModel>Fieldvalue} === 'X'}">
+			<!--<customData>-->
+			<!--	<core:CustomData key="{sectionsModel>Fieldname}" value="{sectionsModel>Fieldcontroltype}"/>-->
+			<!--</customData>-->
+		</CheckBox>
+		<Input name="{sectionsModel>Fieldname}" visible="{= ${sectionsModel>Fieldcontroltype} === 'HELP' &amp;&amp; !${sectionsModel>Hidden}}"
+			valueHelpOnly="true" value="{sectionsModel>Fieldvalue}" editable="{= !${sectionsModel>Readonly} &amp;&amp; true }"
+			liveChange="handleInputValueLiveChange" showValueHelp="{sectionsModel>Fieldhasvaluehelp}" valueHelpRequest="handleValueHelpRequestMovement"
+			change="handleInputValueChange"/>
+		<Input name="{sectionsModel>Fieldname}" type="{= ${sectionsModel>Blockid} === 'N'? 'Number':'Text'}"
+			visible="{= ${sectionsModel>Fieldcontroltype} === 'TEXT' &amp;&amp; !${sectionsModel>Hidden}}" value="{sectionsModel>Fieldvalue}"
+			editable="{= !${sectionsModel>Readonly} &amp;&amp; true }" liveChange="handleInputValueLiveChange" change="handleInputValueChange"/>
+		<TextArea name="{sectionsModel>Fieldname}" value="{sectionsModel>Fieldvalue}" width="80%" maxLength="200" growing="true"
+			visible="{= ${sectionsModel>Fieldcontroltype} ==='TEXTAREA' &amp;&amp; !${sectionsModel>Hidden}}"
+			editable="{= !${sectionsModel>Readonly} &amp;&amp; true }"></TextArea>
+		<!--<Link visible="{= ${sectionsModel>Fieldcontroltype} === 'LINK' &amp;&amp; !${sectionsModel>Hidden}}" text="{sectionsModel>Fieldlabel}"-->
+		<!--	press="handleLinkPress"/>-->
+		<Switch type="AcceptReject" name="{sectionsModel>Fieldname}" state="{= ${sectionsModel>Fieldvalue} === '01'}"
+			enabled="{= !${sectionsModel>Readonly} &amp;&amp; true }" change="onSwitchChange"
+			visible="{= ${sectionsModel>Fieldcontroltype} === 'SWITCH' &amp;&amp; !${sectionsModel>Hidden}}"></Switch>
+		<Button icon="sap-icon://pdf-attachment" tooltip="Click Here to Download"
+			visible="{= ${sectionsModel>Fieldcontroltype} === 'PDF_DOWNLOAD' &amp;&amp; !${sectionsModel>Hidden}}" press="onPressPDFDownload"></Button>
+		<!--<Button icon="{sectionsModel>Fieldvalue}" visible="{= ${sectionsModel>Fieldcontroltype} === 'BUTTON' &amp;&amp; !${sectionsModel>Hidden}}"-->
+		<!--	press="onTableEditPress"></Button>-->
+		<!--<Text visible="{= ${sectionsModel>Fieldcontroltype} === 'TEXTFIELD' &amp;&amp; !${sectionsModel>Hidden}}"-->
+		<!--	text="{}" wrapping="true">-->
+		<!--	<customData>-->
+		<!--		<core:CustomData key="{sectionsModel>Fieldname}" value="{sectionsModel>Fieldvalue}"/>-->
+		<!--	</customData>-->
+		<!--</Text>-->
+	</VBox>
+</core:FragmentDefinition>

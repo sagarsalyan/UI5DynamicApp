@@ -1,0 +1,33 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:uxap="sap.uxap" xmlns="sap.m" controllerName="App.DynamicApp.controller.Display"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	<App>
+		<pages>
+			<Page title="Display">
+				<content>
+					<uxap:ObjectPageLayout id="idDetail" upperCaseAnchorBar="false" enableLazyLoading="false" showTitleInHeaderContent="true"
+						alwaysShowContentHeader="true" showFooter="true">
+						<uxap:headerTitle>
+							<uxap:ObjectPageHeader objectImageURI="{libCommon>/srcPath}" objectImageShape="Circle" isObjectIconAlwaysVisible="false"
+								isObjectTitleAlwaysVisible="false" isObjectSubtitleAlwaysVisible="false">
+								<uxap:actions>
+									<uxap:ObjectPageHeaderActionButton text="{btnmodel>/name}" visible="{btnmodel>/appbtnVisible}" hideIcon="true" hideText="false"
+										type="Emphasized" press="onApproverList"/>
+								</uxap:actions>
+							</uxap:ObjectPageHeader>
+						</uxap:headerTitle>
+						<uxap:headerContent>
+							<core:Fragment fragmentName="App.DynamicApp.fragment.Header" type="XML"/>
+						</uxap:headerContent>
+						<uxap:footer>
+							<OverflowToolbar visible="true">
+								<ToolbarSpacer/>
+								<Button text="{i18n>btnReview}" type="Accept" press="onReview" visible="{= ${visibleModel>/hideSaveBtn}}"/>
+								<Button text="{i18n>btnBack}" type="Reject" press="onCancel" visible="{= ${visibleModel>/hideEditBtn}}"/>
+							</OverflowToolbar>
+						</uxap:footer>
+					</uxap:ObjectPageLayout>
+				</content>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>
