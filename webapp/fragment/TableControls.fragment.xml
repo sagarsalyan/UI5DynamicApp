@@ -39,19 +39,19 @@
 			name="{= ${sectionsModel>Fieldname}}" visible="{= ${sectionsModel>Fieldproperty} === 'INPUT'}"
 			showValueHelp="{path: 'sectionsModel>Hasf4', formatter: '.formatter.setFieldManagement'}"
 			required="{path: 'sectionsModel>Ismandatory', formatter: '.formatter.setFieldManagement'}" valueHelpRequest="handleValueHelpRequest"/>
-		<!--<CheckBox selected="{path: 'sectionsModel>Fieldvalue', formatter: '.formatter.setCheckBoxValue'}" select="onCheckboxSelect"-->
-		<!--	valueState="{sectionsModel>ValueState}" enabled="{path: 'sectionsModel>Iseditable', formatter: '.formatter.setFieldManagement'}"-->
-		<!--	name="{= ${sectionsModel>Fieldname}}" visible="{= ${sectionsModel>Fieldproperty} === 'CHECKBOX'}"-->
-		<!--	editable="{path: 'sectionsModel>Iseditable', formatter: '.formatter.setFieldManagement'}"-->
-		<!--	required="{path: 'sectionsModel>Ismandatory', formatter: '.formatter.setFieldManagement'}"/>-->
-		<!--<DatePicker editable="{path: 'sectionsModel>Iseditable', formatter: '.formatter.setFieldManagement'}" change="onDateChange"-->
-		<!--	valueState="{sectionsModel>ValueState}" value="{sectionsModel>Fieldvalue}" placeholder="{= ${sectionsModel>Fieldlabel}}"-->
-		<!--	name="{= ${sectionsModel>Fieldname}}" width="100%" visible="{= ${sectionsModel>Fieldproperty} === 'DATE'}" displayFormat="dd.MM.yyyy"-->
-		<!--	required="{path: 'sectionsModel>Ismandatory', formatter: '.formatter.setFieldManagement'}"/>-->
-		<!--<TextArea editable="{path: 'sectionsModel>Iseditable', formatter: '.formatter.setFieldManagement'}" change="onInputChange"-->
-		<!--	valueState="{sectionsModel>ValueState}" value="{sectionsModel>Fieldvalue}" placeholder="{= ${sectionsModel>Fieldlabel}}" width="100%"-->
-		<!--	name="{= ${sectionsModel>Fieldname}}" visible="{= ${sectionsModel>Fieldproperty} === 'TEXTAREA'}"-->
-		<!--	required="{path: 'sectionsModel>Ismandatory', formatter: '.formatter.setFieldManagement'}"/>-->
+		<CheckBox selected="{path: 'sectionsModel>Fieldvalue', formatter: '.formatter.setCheckBoxValue'}" select="onCheckboxSelect"
+			valueState="{sectionsModel>ValueState}" enabled="{path: 'sectionsModel>Iseditable', formatter: '.formatter.setFieldManagement'}"
+			name="{= ${sectionsModel>Fieldname}}" visible="{= ${sectionsModel>Fieldproperty} === 'CHECKBOX'}"
+			editable="{path: 'sectionsModel>Iseditable', formatter: '.formatter.setFieldManagement'}"
+			required="{path: 'sectionsModel>Ismandatory', formatter: '.formatter.setFieldManagement'}"/>
+		<DatePicker editable="{path: 'sectionsModel>Iseditable', formatter: '.formatter.setFieldManagement'}" change="onDateChange"
+			valueState="{sectionsModel>ValueState}" value="{sectionsModel>Fieldvalue}" placeholder="{= ${sectionsModel>Fieldlabel}}"
+			name="{= ${sectionsModel>Fieldname}}" width="100%" visible="{= ${sectionsModel>Fieldproperty} === 'DATE'}" displayFormat="dd.MM.yyyy"
+			required="{path: 'sectionsModel>Ismandatory', formatter: '.formatter.setFieldManagement'}"/>
+		<TextArea editable="{path: 'sectionsModel>Iseditable', formatter: '.formatter.setFieldManagement'}" change="onInputChange"
+			valueState="{sectionsModel>ValueState}" value="{sectionsModel>Fieldvalue}" placeholder="{= ${sectionsModel>Fieldlabel}}" width="100%"
+			name="{= ${sectionsModel>Fieldname}}" visible="{= ${sectionsModel>Fieldproperty} === 'TEXTAREA'}"
+			required="{path: 'sectionsModel>Ismandatory', formatter: '.formatter.setFieldManagement'}"/>
 		<Button icon="sap-icon://delete" name="{sectionsModel>Fieldname}" type="Reject" tooltip="Delete"
 			enabled="{path: 'sectionsModel>Iseditable', formatter: '.formatter.setFieldManagement'}"
 			visible="{= ${sectionsModel>Fieldproperty} === 'BUTTON'}" press="onPressTableItemDelete"/>
