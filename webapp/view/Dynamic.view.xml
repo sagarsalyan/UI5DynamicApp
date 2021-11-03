@@ -1,0 +1,20 @@
+<mvc:View controllerName="app.DynamicApp.controller.Dynamic" xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns="sap.m"
+	xmlns:uxap="sap.uxap">
+	<Shell id="shell">
+		<App id="app">
+			<pages>
+				<Page title="{detailView>/dynamicPageTitle}">
+					<content>
+						<uxap:ObjectPageLayout id="idDetail"></uxap:ObjectPageLayout>
+					</content>
+					<footer>
+						<OverflowToolbar>
+							<ToolbarSpacer/>
+							<Button text="Save" type="Emphasized" press="onSave"/>
+						</OverflowToolbar>
+					</footer>
+				</Page>
+			</pages>
+		</App>
+	</Shell>
+</mvc:View>

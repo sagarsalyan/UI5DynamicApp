@@ -1,0 +1,28 @@
+<!-- 
+
+ Copyright (C) 2009-2019 SAP SE or an SAP affiliate company. All rights reserved.
+
+ -->
+<core:FragmentDefinition xmlns="sap.m" xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout">
+	<!--<VBox items="{attchmentsModel>content}">-->
+	<!--	<items>-->
+	<!--		<core:Fragment fragmentName="app.DynamicApp.fragment.DynamicAttachmentFormContent" type="XML"/>-->
+	<!--	</items>-->
+	<!--</VBox>-->
+	<UploadCollection maximumFilenameLength="100" uploadButtonInvisible="{= !${detailView>/uploadEnabled}}" multiple="true"
+		noDataDescription="Drop files or use the &quot;+&quot; button to upload files" sameFilenameAllowed="false" instantUpload="true"
+		change="onChange" selectionChange="onSelectionChange" fileDeleted="onFileDeleted" filenameLengthExceed="onFilenameLengthExceed"
+		fileSizeExceed="onFileSizeExceed" typeMissmatch="onTypeMissmatch" uploadComplete="onUploadComplete" beforeUploadStarts="odataupload"
+		mimeType="application/pdf,text/plain,application/vnd.ms-excel,application/msword,image/jpeg,image/png,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-powerpoint"
+		items="{attchmentsModel>content/}" uploadUrl="/sap/opu/odata/sap/ZMDM_DYNAMIC_UI_SRV/FileSet">
+		<items>
+			<UploadCollectionItem documentId="{attchmentsModel>Attachmentid}" fileName="{attchmentsModel>Attachname}"
+				url="/sap/opu/odata/sap/ZMDM_DYNAMIC_UI_SRV/FileSet(Reqid='{detailView>/reqid}',Attachmentid='{attchmentsModel>Attachmentid}')/$value"
+				mimeType="{attchmentsModel>Mimetype}" visibleDelete="{detailView>/uploadEnabled}" visibleEdit="false">
+				<attributes>
+					<ObjectAttribute active="true" press="onpressDownload"/>
+				</attributes>
+			</UploadCollectionItem>
+		</items>
+	</UploadCollection>
+</core:FragmentDefinition>

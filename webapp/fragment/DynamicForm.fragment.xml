@@ -1,0 +1,31 @@
+<!-- 
+
+ Copyright (C) 2009-2019 SAP SE or an SAP affiliate company. All rights reserved.
+
+ -->
+<core:FragmentDefinition xmlns="sap.m" xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout">
+	<f:Form editable="true" ariaLabelledBy="objSec" width="100%" formContainers="{sectionsModel>Groups/}">
+		<f:layout>
+			<f:ResponsiveGridLayout emptySpanL="{sectionsModel>FormLayout/EmptySpanL}" labelSpanL="{sectionsModel>FormLayout/LabelSpanL}"
+				labelSpanM="{sectionsModel>FormLayout/LabelSpanM}" labelSpanXL="{sectionsModel>FormLayout/LabelSpanXL}"
+				emptySpanS="{sectionsModel>FormLayout/EmptySpanL}" emptySpanM="{sectionsModel>FormLayout/EmptySpanM}"
+				columnsL="{sectionsModel>FormLayout/ColumnL}" columnsM="{sectionsModel>FormLayout/ColumnM}"/>
+		</f:layout>
+		<f:formContainers>
+			<f:FormContainer formElements="{path: 'sectionsModel>SectionFormControls/', templateShareable:false}">
+				<f:formElements>
+					<f:FormElement visible="{= !${sectionsModel>Hidden}}">
+						<f:label>
+							<Label text="{parts: [{path: 'sectionsModel>Fieldproperty'}, {path: 'sectionsModel>Fieldlabel'}], formatter: '.formatter.setFieldLabel'}"
+								tooltip="{sectionsModel>Fieldlabel}" wrapping="true"
+								required="{path: 'sectionsModel>Ismandatory', formatter: '.formatter.setFieldManagement'}"/>
+						</f:label>
+						<f:fields>
+							<core:Fragment fragmentName="app.DynamicApp.fragment.FieldControls" type="XML"/>
+						</f:fields>
+					</f:FormElement>
+				</f:formElements>
+			</f:FormContainer>
+		</f:formContainers>
+	</f:Form>
+</core:FragmentDefinition>

@@ -1,0 +1,61 @@
+<!-- 
+
+ Copyright (C) 2009-2019 SAP SE or an SAP affiliate company. All rights reserved.
+
+ -->
+<!--<core:FragmentDefinition xmlns="sap.m" xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout"-->
+<!--	xmlns:u="sap.ui.unified">-->
+<!--	<VBox class="sapUiNoMargin">-->
+<!--		<Input change="onInputChange" value="{sectionsModel>Fieldvalue}" placeholder="{= ${sectionsModel>Fieldlabel}}"-->
+<!--			name="{= ${sectionsModel>Fieldname}}" visible="{= (${sectionsModel>Fieldproperty} === 'INPUT' &amp;&amp; ${dynamicView>/create} !== 'D')}"-->
+<!--			editable="{dynamicView>/fieldEditable}" showValueHelp="{path: 'sectionsModel>Hasf4', formatter: '.formatter.setFieldManagement'}" required="path: 'sectionsModel>Ismandatory', formatter: '.formatter.setFieldManagement'}"-->
+<!--			valueHelpRequest="handleValueHelpRequest" valueHelpOnly="path: 'sectionsModel>Ismandatory', formatter: '.formatter.setFieldManagement'}"/>-->
+<!--<Select change="onSelectChange" placeholder="{= ${sectionsModel>Fieldlabel}}" name="{= ${sectionsModel>Fieldname}}" width="100%"-->
+<!--	visible="{= (${sectionsModel>Fieldproperty} === 'DROPDOWN' &amp;&amp; ${dynamicView>/create} !== 'D')}"-->
+<!--	required="path: 'sectionsModel>Ismandatory', formatter: '.formatter.setFieldManagement'}"/>-->
+<!--		<CheckBox selected="{sectionsModel>Fieldvalue}" select="onCheckboxSelect" valueState="{sectionsModel>ValueState}"-->
+<!--			enabled="{= ${dynamicView>/create} !== 'D'}" name="{= ${sectionsModel>Fieldname}}"-->
+<!--			visible="{= (${sectionsModel>Fieldproperty} === 'CHECKBOX' || ${sectionsModel>Fieldproperty} === '')? true:false}"-->
+<!--			editable="{dynamicView>/fieldEditable}" required="path: 'sectionsModel>Ismandatory', formatter: '.formatter.setFieldManagement'}"/>-->
+<!--		<DatePicker editable="{dynamicView>/fieldEditable}" change="onDateChange" valueState="{sectionsModel>ValueState}"-->
+<!--			value="{sectionsModel>Fieldvalue}" placeholder="{= ${sectionsModel>Fieldlabel}}" name="{= ${sectionsModel>Fieldname}}" width="100%"-->
+<!--			visible="{= (${sectionsModel>Fieldproperty} === 'DATE' &amp;&amp; ${dynamicView>/create} !== 'D')}" displayFormat="dd.MM.yyyy"-->
+<!--			required="path: 'sectionsModel>Ismandatory', formatter: '.formatter.setFieldManagement'}"/>-->
+<!--		<TextArea editable="{dynamicView>/fieldEditable}" change="onInputChange" valueState="{sectionsModel>ValueState}"-->
+<!--			value="{sectionsModel>Fieldvalue}" placeholder="{= ${sectionsModel>Fieldlabel}}" width="100%" name="{= ${sectionsModel>Fieldname}}"-->
+<!--			visible="{= (${sectionsModel>Fieldproperty} === 'TEXTAREA' &amp;&amp; ${dynamicView>/create} !== 'D')}"-->
+<!--			required="path: 'sectionsModel>Ismandatory', formatter: '.formatter.setFieldManagement'}"/>-->
+<!--		<Button icon="sap-icon://delete" name="{sectionsModel>Fieldname}" type="Reject" tooltip="Delete" enabled="{dynamicView>/fieldEditable}"-->
+<!--			visible="{= ${sectionsModel>Fieldproperty} === 'BUTTON'}" press="onPressTableItemDelete"/>-->
+<!--		<Text visible="{= ${dynamicView>/create} === 'D'}"-->
+<!--			text="{parts: [{path: 'sectionsModel>Fieldvalue'}, {path: 'sectionsModel>Fieldproperty'}], formatter: '.formatter.setText'}"/>-->
+<!--	</VBox>-->
+<!--</core:FragmentDefinition>-->
+<core:FragmentDefinition xmlns="sap.m" xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout"
+	xmlns:u="sap.ui.unified">
+	<VBox class="sapUiNoMargin">
+		<!--<Input change="onInputChange" value="{sectionsModel>Fieldvalue}"/>-->
+		<Input  value="{sectionsModel>Fieldvalue}" placeholder="{= ${sectionsModel>Fieldlabel}}"
+			name="{= ${sectionsModel>Fieldname}}" visible="{= ${sectionsModel>Fieldproperty} === 'INPUT'}"
+			showValueHelp="{path: 'sectionsModel>Hasf4', formatter: '.formatter.setFieldManagement'}"
+			required="{path: 'sectionsModel>Ismandatory', formatter: '.formatter.setFieldManagement'}" valueHelpRequest="handleValueHelpRequest"/>
+		<!--<CheckBox selected="{path: 'sectionsModel>Fieldvalue', formatter: '.formatter.setCheckBoxValue'}" select="onCheckboxSelect"-->
+		<!--	valueState="{sectionsModel>ValueState}" enabled="{path: 'sectionsModel>Iseditable', formatter: '.formatter.setFieldManagement'}"-->
+		<!--	name="{= ${sectionsModel>Fieldname}}" visible="{= ${sectionsModel>Fieldproperty} === 'CHECKBOX'}"-->
+		<!--	editable="{path: 'sectionsModel>Iseditable', formatter: '.formatter.setFieldManagement'}"-->
+		<!--	required="{path: 'sectionsModel>Ismandatory', formatter: '.formatter.setFieldManagement'}"/>-->
+		<!--<DatePicker editable="{path: 'sectionsModel>Iseditable', formatter: '.formatter.setFieldManagement'}" change="onDateChange"-->
+		<!--	valueState="{sectionsModel>ValueState}" value="{sectionsModel>Fieldvalue}" placeholder="{= ${sectionsModel>Fieldlabel}}"-->
+		<!--	name="{= ${sectionsModel>Fieldname}}" width="100%" visible="{= ${sectionsModel>Fieldproperty} === 'DATE'}" displayFormat="dd.MM.yyyy"-->
+		<!--	required="{path: 'sectionsModel>Ismandatory', formatter: '.formatter.setFieldManagement'}"/>-->
+		<!--<TextArea editable="{path: 'sectionsModel>Iseditable', formatter: '.formatter.setFieldManagement'}" change="onInputChange"-->
+		<!--	valueState="{sectionsModel>ValueState}" value="{sectionsModel>Fieldvalue}" placeholder="{= ${sectionsModel>Fieldlabel}}" width="100%"-->
+		<!--	name="{= ${sectionsModel>Fieldname}}" visible="{= ${sectionsModel>Fieldproperty} === 'TEXTAREA'}"-->
+		<!--	required="{path: 'sectionsModel>Ismandatory', formatter: '.formatter.setFieldManagement'}"/>-->
+		<Button icon="sap-icon://delete" name="{sectionsModel>Fieldname}" type="Reject" tooltip="Delete"
+			enabled="{path: 'sectionsModel>Iseditable', formatter: '.formatter.setFieldManagement'}"
+			visible="{= ${sectionsModel>Fieldproperty} === 'BUTTON'}" press="onPressTableItemDelete"/>
+		<!--<Text visible="{= ${sectionsModel>Fieldproperty} === 'TEXT'}"-->
+		<!--	text="{parts: [{path: 'sectionsModel>Fieldvalue'}, {path: 'sectionsModel>Fieldproperty'}], formatter: '.formatter.setText'}"/>-->
+	</VBox>
+</core:FragmentDefinition>

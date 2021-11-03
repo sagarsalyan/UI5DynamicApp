@@ -1,0 +1,30 @@
+<!-- 
+
+ Copyright (C) 2009-2019 SAP SE or an SAP affiliate company. All rights reserved.
+
+ -->
+<core:FragmentDefinition xmlns="sap.m" xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout">
+	<Table alternateRowColors="true" width="auto" items="{path: 'sectionsModel>Tables/0/SectionTableItems', templateShareable:false}"
+		selectionChange="onTableItemSelected" ariaLabelledBy="processInstance" growing="false" growingScrollToLoad="false"
+		itemPress="onTableItemPress" delete="onTableItemDelete"
+		columns="{path: 'sectionsModel>Tables/0/SectionTableColumns', templateShareable:false}">
+		<headerToolbar>
+			<OverflowToolbar visible="{= ${dynamicView>/create} !== 'D'}">
+				<ToolbarSpacer/>
+				<Button icon="sap-icon://add" tooltip="Add" press="onPressTableItemAdd" enabled="{dynamicView>/fieldEditable}"></Button>
+			</OverflowToolbar>
+		</headerToolbar>
+		<columns>
+			<Column demandPopin="true" hAlign="Center" popinDisplay="Block" visible="true">
+				<header>
+					<Label text="{sectionsModel>Fieldlabel}" wrapping="true" textAlign="Begin" tooltip="{sectionsModel>Fieldlabel}"/>
+				</header>
+			</Column>
+		</columns>
+		<ColumnListItem vAlign="Middle" cells="{path: 'sectionsModel>SectionTableControls', templateShareable:false}">
+			<cells>
+				<core:Fragment fragmentName="app.DynamicApp.fragment.TableControls" type="XML"/>
+			</cells>
+		</ColumnListItem>
+	</Table>
+</core:FragmentDefinition>

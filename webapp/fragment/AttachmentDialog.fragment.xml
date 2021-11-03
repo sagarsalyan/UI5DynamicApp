@@ -1,0 +1,16 @@
+<!-- 
+
+ Copyright (C) 2009-2019 SAP SE or an SAP affiliate company. All rights reserved.
+
+ -->
+<core:FragmentDefinition xmlns="sap.m" xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout" xmlns:uxap="sap.uxap">
+	<Dialog contentHeight="100%" contentWidth="100%" title="Attachments" horizontalScrolling="false" stretch="true" verticalScrolling="false">
+		<content>
+			<uxap:ObjectPageLayout enableLazyLoading="true"></uxap:ObjectPageLayout>
+		</content>
+		<buttons>
+			<Button type="Accept" icon="sap-icon://accept" tooltip="OK" press="onOkPress"/>
+			<!--<Button type="Reject" icon="sap-icon://decline" tooltip="Cancel" press="_onCancelPress"/>-->
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>

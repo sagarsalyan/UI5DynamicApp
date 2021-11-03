@@ -1,0 +1,20 @@
+<!-- 
+
+ Copyright (C) 2009-2019 SAP SE or an SAP affiliate company. All rights reserved.
+
+ -->
+
+<core:FragmentDefinition xmlns="sap.m" xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout">
+	<FlexBox wrap="Wrap" fitContainer="true" alignItems="Stretch" items="{headerData>/}">
+		<l:VerticalLayout class="sapUiMediumMarginEnd sapUiSmallMarginTop">
+			<VBox class="sapUiNoMargin">
+				<Label text="{headerData>label}" tooltip="{headerData>/label}" class="lebelBold" design="Bold"/>
+				<ObjectStatus class="ctmTextCls" text="{headerData>value}" state="{path: 'headerData>value', formatter: '.formatter.setStatusText' }">
+					<customData>
+						<core:CustomData key="color" value="{path: 'Statustext', formatter: '.formatter.setStatusText'}" writeToDom="true"></core:CustomData>
+					</customData>
+				</ObjectStatus>
+			</VBox>
+		</l:VerticalLayout>
+	</FlexBox>
+</core:FragmentDefinition>

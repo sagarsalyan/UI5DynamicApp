@@ -1,0 +1,34 @@
+<!-- 
+
+ Copyright (C) 2009-2019 SAP SE or an SAP affiliate company. All rights reserved.
+
+ -->
+<core:FragmentDefinition xmlns="sap.m" xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout"
+	xmlns:u="sap.ui.unified">
+	<VBox class="sapUiNoMargin">
+		<CheckBox select="onCheckBoxClick" selected="{path: 'sectionsModel>Fieldvalue', formatter: '.formatter.setCheckBoxValue'}"
+			visible="{= ${sectionsModel>Fieldproperty} === 'CHECKBOX'}"
+			enabled="{path: 'sectionsModel>Iseditable', formatter: '.formatter.setFieldManagement'}" name="{= ${sectionsModel>Fieldname}}"/>
+		<Text visible="{= ${sectionsModel>Fieldproperty} === 'TEXT'}"
+			text="{parts: [{path: 'sectionsModel>Fieldvalue'}, {path: 'sectionsModel>Fieldproperty'}], formatter: '.formatter.setText'}"/>
+		<Input change="onInputChange" value="{sectionsModel>Fieldvalue}" placeholder="{sectionsModel>Fieldlabel}"
+			name="{= ${sectionsModel>Fieldname}}" visible="{= ${sectionsModel>Fieldproperty} === 'INPUT'}"
+			enabled="{path: 'sectionsModel>Iseditable', formatter: '.formatter.setFieldManagement'}"
+			showValueHelp="{path: 'sectionsModel>Hasf4', formatter: '.formatter.setFieldManagement'}"
+			required="{path: 'sectionsModel>Ismandatory', formatter: '.formatter.setFieldManagement'}" valueHelpRequest="handleValueHelpRequest"
+			liveChange="onInputChangeLiveChange"/>
+		<DatePicker enabled="{path: 'sectionsModel>Iseditable', formatter: '.formatter.setFieldManagement'}" change="onDateChange"
+			value="{parts: [{path: 'sectionsModel>Fieldvalue'}, {path: 'sectionsModel>Fieldproperty'}], formatter: '.formatter.setText'}"
+			placeholder="{sectionsModel>Fieldlabel}" name="{= ${sectionsModel>Fieldname}}" width="100%"
+			visible="{= ${sectionsModel>Fieldproperty} === 'DATE'}" displayFormat="dd.MM.yyyy"
+			required="{path: 'sectionsModel>Ismandatory', formatter: '.formatter.setFieldManagement'}"/>
+		<TextArea enabled="{path: 'sectionsModel>Iseditable', formatter: '.formatter.setFieldManagement'}" change="onInputChange"
+			value="{sectionsModel>Fieldvalue}" placeholder="{sectionsModel>Fieldlabel}" width="100%" name="{= ${sectionsModel>Fieldname}}"
+			visible="{= ${sectionsModel>Fieldproperty} === 'TEXTAREA'}"
+			required="{path: 'sectionsModel>Ismandatory', formatter: '.formatter.setFieldManagement'}"/>
+		<Button visible="{= ${sectionsModel>Fieldproperty} === 'BUTTON'}" text="{sectionsModel>Fieldlabel}" press="onPressDynamicButtonPress"
+			type="Emphasized" tooltip="{sectionsModel>Fieldlabel}"
+			enabled="{path: 'sectionsModel>Iseditable', formatter: '.formatter.setFieldManagement'}"/>
+		<!--enabled="{path: 'sectionsModel>Iseditable', formatter: '.formatter.setFieldManagement'}"-->
+	</VBox>
+</core:FragmentDefinition>

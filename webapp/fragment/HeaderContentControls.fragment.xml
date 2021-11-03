@@ -1,0 +1,13 @@
+<!-- 
+
+ Copyright (C) 2009-2019 SAP SE or an SAP affiliate company. All rights reserved.
+
+ -->
+<core:FragmentDefinition xmlns="sap.m" xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout"
+	xmlns:u="sap.ui.unified">
+	<VBox class="sapUiNoMargin">
+		<Input value="{headerModel>Fieldvalue}" placeholder="{= ${headerModel>Fieldlabel}}" name="{= ${headerModel>Fieldname}}"
+			showValueHelp="{= ${headerModel>Hasf4}}" required="{headerModel>Ismandatory}" valueHelpRequest="handleValueHelpRequest"
+			valueHelpOnly="{headerModel>Ismandatory}" editable="{dynamicView>/headerSectionEnabled}"/>
+	</VBox>
+</core:FragmentDefinition>
