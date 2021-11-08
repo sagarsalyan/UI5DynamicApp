@@ -120,14 +120,6 @@ sap.ui.define([
 
 		},
 		_prepareFormData: function (path, modelName) {
-			// if (!this._displayDetails) {
-			// 	this._displayDetails = sap.ui.xmlfragment(
-			// 		"app.DynamicApp.fragment.TableItem",
-			// 		this
-			// 	);
-			// 	this.getView().addDependent(this._displayDetails);
-			// }
-
 			var aGroups = [],
 				aFlag = [],
 				j = 0;
@@ -378,15 +370,15 @@ sap.ui.define([
 			debugger;
 			var title = oEvent.getSource().getParent().getParent().getParent().getParent().getTitle(),
 				mainData = this.getView().getModel("sectionsModel").getData(),
-				columns = [...oEvent.getSource().getParent().getParent().getBindingContext("sectionsModel").getObject().Tables[0].SectionTableItems[
-					0].SectionTableControls];
-			columns = [...columns.map(item => {
+				columns = oEvent.getSource().getParent().getParent().getBindingContext("sectionsModel").getObject().Tables[0].SectionTableItems[
+					0].SectionTableControls;
+			columns = columns.map(item => {
 				var itemCopy = Object.assign({}, item);
 				itemCopy.Columnno = "";
 				itemCopy.Fieldvalue = "";
 				return itemCopy
 
-			})];
+			});
 			var obj = {
 				SectionTableControls: columns
 			};
@@ -469,33 +461,33 @@ sap.ui.define([
 			}
 			this._valueHelpDialog.setTitle(this.sInputLable);
 			this._valueHelpDialog.open();
-			this.getModel("zmdg_dynamic_ui_srv").read("/SearchHelpSet", {
-				filters: filter,
-				success: function success(oData, oResponse) {
-					debugger;
-					this.getView().getModel("detailView").setProperty("/busy", false);
-					var model = new sap.ui.model.json.JSONModel();
-					model.setData(oData.results);
-					this.getView().setModel(model, "vhitem");
-					this._valueHelpDialog.setTitle(this.sInputLable);
-					this._valueHelpDialog.open();
-					if (this.sInputValue != "") {
-						var firstFilter = new sap.ui.model.Filter([new sap.ui.model.Filter("Skey", sap.ui.model.FilterOperator.Contains, this.sInputValue
-							.split(" - ")[0])]);
-						var secondFilter = new sap.ui.model.Filter([new sap.ui.model.Filter("Value", sap.ui.model.FilterOperator.Contains, this.sInputValue
-							.split(" - ")[0])]);
-						var mainFilter = new sap.ui.model.Filter({
-							filters: [firstFilter, secondFilter],
-							and: false
-						});
-						this._valueHelpDialog.getBinding("items").filter(mainFilter);
-					}
-				}.bind(this),
-				error: function error(oError) {
-					this.getView().getModel("detailView").setProperty("/busy", false);
-					this.getErrorDetails(oError);
-				}.bind(this)
-			});
+			// this.getModel("zmdg_dynamic_ui_srv").read("/SearchHelpSet", {
+			// 	filters: filter,
+			// 	success: function success(oData, oResponse) {
+			// 		debugger;
+			// 		this.getView().getModel("detailView").setProperty("/busy", false);
+			// 		var model = new sap.ui.model.json.JSONModel();
+			// 		model.setData(oData.results);
+			// 		this.getView().setModel(model, "vhitem");
+			// 		this._valueHelpDialog.setTitle(this.sInputLable);
+			// 		this._valueHelpDialog.open();
+			// 		if (this.sInputValue != "") {
+			// 			var firstFilter = new sap.ui.model.Filter([new sap.ui.model.Filter("Skey", sap.ui.model.FilterOperator.Contains, this.sInputValue
+			// 				.split(" - ")[0])]);
+			// 			var secondFilter = new sap.ui.model.Filter([new sap.ui.model.Filter("Value", sap.ui.model.FilterOperator.Contains, this.sInputValue
+			// 				.split(" - ")[0])]);
+			// 			var mainFilter = new sap.ui.model.Filter({
+			// 				filters: [firstFilter, secondFilter],
+			// 				and: false
+			// 			});
+			// 			this._valueHelpDialog.getBinding("items").filter(mainFilter);
+			// 		}
+			// 	}.bind(this),
+			// 	error: function error(oError) {
+			// 		this.getView().getModel("detailView").setProperty("/busy", false);
+			// 		this.getErrorDetails(oError);
+			// 	}.bind(this)
+			// });
 		},
 		closeDlg: function (oEvent) {
 			debugger;
