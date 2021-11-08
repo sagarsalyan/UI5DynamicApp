@@ -33,7 +33,7 @@ sap.ui.define([
 			this.getView().setModel(model, "detailView");
 			this.getView().getModel("detailView").setProperty("/uploadEnabled", true);
 			this.getView().getModel("detailView").refresh();
-			this._prepareDetailViewofMDGType(this.data);
+			this._prepareDetailViewofMDGType(this.data); //sending the data for segragating the data
 		},
 		_prepareDetailViewofMDGType: function (path) {
 			debugger;
@@ -43,13 +43,13 @@ sap.ui.define([
 
 			for (var i = 0; i < path.length; i++) {
 				if (path[i].Sectionname == 'ATTACHMENTS' || path[i].sectionname == 'ATTACHMENTS') {
-					this.attachmentData.push(path[i]);
+					this.attachmentData.push(path[i]); //for attachment data
 				}
 				// else if (path[i].Sectionname == 'Header') {
 				// 	this.headerData.push(path[i]);
 				// } 
 				else {
-					this.mainData.push(path[i]);
+					this.mainData.push(path[i]); //for other data(form and table)
 				}
 			}
 			if (this.mainData.length > 0) {
@@ -130,7 +130,7 @@ sap.ui.define([
 				isTableItem = false,
 				IsContainerEditable = true;
 
-			for (var iFieldCount = 0; iFieldCount < path.length; iFieldCount++) {
+			for (var iFieldCount = 0; iFieldCount < path.length; iFieldCount++) { //loop for segragating data into object section, form, table
 				var oProcessItem = path[iFieldCount];
 				if (aFlag[oProcessItem.Subsecname || oProcessItem.subsecname]) {
 					switch (oProcessItem.Subsectype || oProcessItem.subsectype) {
@@ -195,7 +195,7 @@ sap.ui.define([
 				}
 			}
 
-			aGroups.forEach(function (oGroupItem) {
+			aGroups.forEach(function (oGroupItem) { //creating group
 				if (oGroupItem.IsFormVisible) {
 					if (aFormFlag[oGroupItem.FormId]) {
 						aForms[k - 1].Groups.push(oGroupItem);
@@ -238,7 +238,7 @@ sap.ui.define([
 				}
 			});
 
-			for (var i = 0; i < aForms.length; i++) {
+			for (var i = 0; i < aForms.length; i++) { //adding data into group based on 'Columnno' property
 				var columnAr = [];
 				if (aForms[i].IsFormVisible) {
 					for (var j = 0; j < aForms[i].Groups[0].SectionFormControls.length; j++) {
@@ -268,7 +268,7 @@ sap.ui.define([
 				}
 			}
 
-			aForms.forEach(function (oFormItem) {
+			aForms.forEach(function (oFormItem) { //setting the form column 
 				if (oFormItem.IsFormVisible) {
 					var iColumnLen = oFormItem.Groups.length;
 					oFormItem.FormLayout.ColumnL = iColumnLen;
@@ -292,7 +292,7 @@ sap.ui.define([
 
 			var mainAr = [];
 
-			for (var i = 0; i < secAr.length; i++) {
+			for (var i = 0; i < secAr.length; i++) { // creating subsections
 				var obj = {
 					SectionName: secAr[i],
 					subSec: []
