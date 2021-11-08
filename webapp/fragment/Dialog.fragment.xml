@@ -1,0 +1,10 @@
+<!-- 
+
+ Copyright (C) 2009-2019 SAP SE or an SAP affiliate company. All rights reserved.
+
+ -->
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<SelectDialog confirm="closeDlg" liveChange="livechangesearch" cancel="closeDlg" items="{vhitem>/}" showClearButton="true" rememberSelections="true">
+		<StandardListItem title="{vhitem>Skey}" description="{vhitem>Value}"/>
+	</SelectDialog>
+</core:FragmentDefinition>

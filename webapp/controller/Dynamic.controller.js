@@ -26,13 +26,14 @@ sap.ui.define([
 			}
 			var model = new JSONModel();
 			model.setData(header);
-			this.getView().setModel(model, "headerData")
-				//page section
+			this.getView().setModel(model, "headerData");
+
+			//page section
 			var model = new sap.ui.model.json.JSONModel();
 			this.getView().setModel(model, "detailView");
 			this.getView().getModel("detailView").setProperty("/uploadEnabled", true);
 			this.getView().getModel("detailView").refresh();
-			this._prepareDetailViewofMDGType(this.Data);
+			this._prepareDetailViewofMDGType(this.data);
 		},
 		_prepareDetailViewofMDGType: function (path) {
 			debugger;
@@ -394,7 +395,7 @@ sap.ui.define([
 					if (mainData[i].subSec[j].SubSectionTitle == title) {
 						for (var k = 0; k < obj.SectionTableControls.length; k++) {
 							obj.SectionTableControls[k].Columnno = (parseInt(mainData[i].subSec[j].Tables[0].SectionTableItems.length) + 1).toString();
-							// this.data.push(obj.SectionTableControls[k]);
+							this.data.push(obj.SectionTableControls[k]);
 						}
 						mainData[i].subSec[j].Tables[0].SectionTableItems.push(obj);
 						break;
@@ -403,7 +404,158 @@ sap.ui.define([
 			}
 			this.getView().getModel("sectionsModel").refresh();
 		},
+		onInputChange: function (oEvent) {
+			oEvent.getSource().setValueState("None");
+			if (oEvent.getSource().getShowValueHelp()) {
+				oEvent.getSource().setValue(oEvent.getSource().getValue().toUpperCase());
+			}
+			for (var i = 0; i < this.data.length; i++) {
+				if (oEvent.getSource().getName() == this.data[i].Fieldname) {
+					this.data[i].Fieldvalue = oEvent.getSource().getValue()
+				}
+			}
+		},
+		onCheckBoxClick: function (oEvent) {
+			debugger;
+			for (var i = 0; i < this.data.length; i++) {
+				if (oEvent.getSource().getName() == this.data[i].Fieldname) {
+					if (oEvent.getSource().getSelected()) {
+						this.data[i].Fieldvalue = true;
+					} else {
+						this.data[i].Fieldvalue = false;
+					}
+				}
+			}
+		},
+		onInputChangeLiveChange: function (oEvent) {
+			oEvent.getSource().setValueState("None");
+		},
+		onDateChange: function (oEvent) {
+			oEvent.getSource().setValueState("None");
+			this.date = oEvent.getSource().getValue().split("/")[0] + "" + oEvent.getSource().getValue().split("/")[1] + "" + oEvent.getSource()
+				.getDateValue().getFullYear();
+		},
+		onCheckboxSelect: function (oEvent) {
+			oEvent.getSource().setSelected(oEvent.getSource().getSelected());
+			oEvent.getSource().setValueState("None");
+		},
+		onSelectChange: function (oEvent) {
+			oEvent.getSource().setValueState("None");
+		},
+		handleValueHelpRequest: function (oEvent) {
+			oEvent.getSource().setValueState("None");
+			debugger;
+			var data = {};
+			for (var i = 0; i < this.data.length; i++) {
+				data[this.data[i].Fieldname] = this.data[i].Fieldvalue;
+			}
+			data = JSON.stringify(data);
+			this.getView().getModel("detailView").setProperty("/busy", true);
+			this.sInputValue = oEvent.getSource().getValue();
+			this.sInput = oEvent.getSource();
+			this.sInputName = oEvent.getSource().getName();
+			this.sInputLable = oEvent.getSource().getPlaceholder();
+			var filter = [],
+				fltr = [];
+			fltr.push(new sap.ui.model.Filter("Value", sap.ui.model.FilterOperator.EQ, this.sInputName));
+			fltr.push(new sap.ui.model.Filter("Depend", sap.ui.model.FilterOperator.EQ, data));
+			filter.push(new sap.ui.model.Filter({
+				filters: fltr,
+				and: true
+			}));
+			if (!this._valueHelpDialog) {
+				this._valueHelpDialog = sap.ui.xmlfragment("app.DynamicApp.fragment.Dialog", this);
+				this.getView().addDependent(this._valueHelpDialog);
+			}
+			this._valueHelpDialog.setTitle(this.sInputLable);
+			this._valueHelpDialog.open();
+			this.getModel("zmdg_dynamic_ui_srv").read("/SearchHelpSet", {
+				filters: filter,
+				success: function success(oData, oResponse) {
+					debugger;
+					this.getView().getModel("detailView").setProperty("/busy", false);
+					var model = new sap.ui.model.json.JSONModel();
+					model.setData(oData.results);
+					this.getView().setModel(model, "vhitem");
+					this._valueHelpDialog.setTitle(this.sInputLable);
+					this._valueHelpDialog.open();
+					if (this.sInputValue != "") {
+						var firstFilter = new sap.ui.model.Filter([new sap.ui.model.Filter("Skey", sap.ui.model.FilterOperator.Contains, this.sInputValue
+							.split(" - ")[0])]);
+						var secondFilter = new sap.ui.model.Filter([new sap.ui.model.Filter("Value", sap.ui.model.FilterOperator.Contains, this.sInputValue
+							.split(" - ")[0])]);
+						var mainFilter = new sap.ui.model.Filter({
+							filters: [firstFilter, secondFilter],
+							and: false
+						});
+						this._valueHelpDialog.getBinding("items").filter(mainFilter);
+					}
+				}.bind(this),
+				error: function error(oError) {
+					this.getView().getModel("detailView").setProperty("/busy", false);
+					this.getErrorDetails(oError);
+				}.bind(this)
+			});
+		},
+		closeDlg: function (oEvent) {
+			debugger;
+			this.oSelectedItem = oEvent.getParameter("selectedItem");
+			if (this.oSelectedItem !== undefined) {
+				this.value = this.oSelectedItem.getProperty("description");
+				this.key = this.oSelectedItem.getProperty("title");
+
+				this.sInput.setValue(this.key.toUpperCase() + " - " + this.value);
+
+			}
+		},
 		onSave: function (oEvent) {
+			for (var j = 0; j < this.getView().byId("idDetail").getSections().length; j++) {
+				for (var k = 0; k < this.getView().byId("idDetail").getSections()[j].getSubSections().length; k++) {
+					if (this.getView().byId("idDetail").getSections()[j].getSubSections()[k].getBlocks()[0].getMetadata()._sClassName ==
+						"sap.ui.layout.form.Form") {
+						for (var l = 0; l < this.getView().byId("idDetail").getSections()[j].getSubSections()[k].getBlocks()[0].getFormContainers().length; l++) {
+							for (var m = 0; m < this.getView().byId("idDetail").getSections()[j].getSubSections()[k].getBlocks()[0].getFormContainers()[l]
+								.getFormElements().length; m++) {
+								for (var n = 0; n < this.getView().byId("idDetail").getSections()[j].getSubSections()[k].getBlocks()[0].getFormContainers()[
+										l]
+									.getFormElements()[m].getFields()[0].getItems().length; n++) {
+
+									if (this.getView().byId("idDetail").getSections()[j].getSubSections()[k].getBlocks()[0].getFormContainers()[l]
+										.getFormElements()[m].getFields()[0].getItems()[n].getMetadata()._sClassName === "sap.m.Input" && this.getView().byId(
+											"idDetail").getSections()[j].getSubSections()[k].getBlocks()[0].getFormContainers()[l]
+										.getFormElements()[m].getFields()[0].getItems()[n].getValue() == "" && this.getView().byId("idDetail").getSections()[j].getSubSections()[
+											k].getBlocks()[0].getFormContainers()[l]
+										.getFormElements()[m].getFields()[0].getItems()[n].getEditable() && this.getView().byId("idDetail").getSections()[j].getSubSections()[
+											k].getBlocks()[0].getFormContainers()[l]
+										.getFormElements()[m].getFields()[0].getItems()[n].getRequired() && this.getView().byId("idDetail").getSections()[j].getSubSections()[
+											k].getBlocks()[0].getFormContainers()[l]
+										.getFormElements()[m].getFields()[0].getItems()[n].getEditable()) {
+										this.getView().byId("idDetail").getSections()[j].getSubSections()[k].getBlocks()[0].getFormContainers()[l]
+											.getFormElements()[m].getFields()[0].getItems()[n].setValueState('Error');
+										sap.m.MessageBox.error(this.getView().byId("idDetail").getSections()[j].getSubSections()[k].getBlocks()[0].getFormContainers()[
+												l]
+											.getFormElements()[m].getLabel().getText() + " is Mandatory!");
+										return;
+									}
+
+								}
+							}
+						}
+					}
+				}
+			}
+			for (var i = 0; i < this.data.length; i++) {
+				if (this.data[i].Fieldvalue == "" && this.data[i].Ismandatory && this.data[i].Iseditable) {
+					this.data[i].ValueState = 'Error';
+					sap.m.MessageBox.error(this.data[i].Fieldlabel + " is Mandatory!");
+					return;
+				}
+			}
+			for (var i = 0; i < this.data.length; i++) {
+				if (this.data[i].Hasf4 == "X" || this.data[i].Hasf4 == true) {
+					this.data[i].Fieldvalue = this.data[i].Fieldvalue.split(" - ")[0].toUpperCase();
+				}
+			}
 			sap.m.MessageBox.success("Data Saved", {
 				actions: ["Yes", "No"],
 				onClose: function (sAction) {
@@ -434,7 +586,6 @@ sap.ui.define([
 					title: attachmentData.subSec[j].subSecName,
 					titleUppercase: false
 				});
-				// var oFragment = sap.ui.xmlfragment("com.sap.ui.VM.fragment.AttachmentDialogContent", this);
 				var oFragment = sap.ui.xmlfragment("app.DynamicApp.fragment.DynamicAttachmentForm", this);
 				oFragment.bindElement("attchmentsModel>/subSec/" + j);
 				oObectPageSubSection.addBlock(oFragment);
@@ -461,7 +612,7 @@ sap.ui.define([
 			}
 			this.attachmentDialog.close();
 		},
-		Data: [{
+		data: [{
 
 			"Stlan": "",
 			"Apprflag": "",
@@ -1017,6 +1168,79 @@ sap.ui.define([
 			"Subsecname": "Interval",
 			"Fieldname": "BUS_AREA",
 			"Fieldlabel": "Business Area",
+			"Fieldtype": "CHAR",
+			"Fieldlength": "0004",
+			"Sequenceno": "001",
+			"Ismandatory": true,
+			"Hasf4": true,
+			"Iseditable": true,
+			"Url": "",
+			"Iscritical": false,
+			"Fieldproperty": "INPUT",
+			"Attachmenttype": "",
+			"Attachmentid": "",
+			"Attachname": "",
+			"Subsectype": "F",
+			"Message": "",
+			"Data": "",
+			"Validate": "",
+			"Dupcheck": "",
+			"Action": "",
+			"Reqid": "",
+			"Edit": false,
+			"Reqtxt": "",
+			"Save": "",
+			"Lifnr": "",
+			"Kunnr": "",
+			"Materialto": "",
+			"Fromplant": "",
+			"Toplant": "",
+			"Tostore": ""
+		}, {
+
+			"Stlan": "",
+			"Apprflag": "",
+			"Configtype": "",
+			"Stlal": "",
+			"Asset": "",
+			"Columnno": "0000000001",
+			"Equnr": "",
+			"Forapp": "",
+			"Saknr": "",
+			"Attachmandtry": "",
+			"Fieldvalue": "",
+			"Fromstore": "",
+			"Reqstatus": "",
+			"Tax": "",
+			"Mdgtype": "AM",
+			"Tokunnr": "",
+			"Tosales": "",
+			"Tovendor": "",
+			"Companycode": "",
+			"Fromsales": "",
+			"Fromsdivi": "",
+			"Mdgtext": "Asset Master",
+			"Roleid": "A2",
+			"Tocompanycode": "",
+			"Todist": "",
+			"Todivi": "",
+			"Fromsdist": "",
+			"Purchaseorg": "",
+			"Rolename": "Time-Dependent",
+			"Matnr": "",
+			"Topurchaseorg": "",
+			"Maktx": "",
+			"Mbrsh": "",
+			"Mtart": "",
+			"Viewid": "J",
+			"Viewname": "Interval",
+			"Viewdespc": "Interval",
+			"Secsequenceno": "003",
+			"Sectionname": "Interval",
+			"Subsequenceno": "002",
+			"Subsecname": "Interval2",
+			"Fieldname": "BUS_AREA",
+			"Fieldlabel": "Business Area2",
 			"Fieldtype": "CHAR",
 			"Fieldlength": "0004",
 			"Sequenceno": "001",
